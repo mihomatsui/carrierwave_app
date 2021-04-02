@@ -1,3 +1,6 @@
 <h1>投稿詳細</h1>
 <p><%= @post.title %></p>
+<% if @post.image? %>
+  <p><%= image_tag @post.image.url %></p>
+<% end %>
 <p><%= link_to "投稿一覧", posts_path %></p>
