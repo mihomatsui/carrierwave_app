@@ -13,4 +13,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   def size_range
     0..5.megabytes
   end
+
+  def default_url(*args)
+    "/images/fallback/" + [version_name, "default.png"].compact.join('_')
+  end
 end
