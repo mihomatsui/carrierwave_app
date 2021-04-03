@@ -37,7 +37,8 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title)
+    # **** 画像も受け取れるように :image を追加 ****
+    params.require(:post).permit(:title, :image)
   end
 
 end
