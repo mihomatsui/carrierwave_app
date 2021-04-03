@@ -22,6 +22,19 @@ class ImageUploader < CarrierWave::Uploader::Base
     "#{secure_token}.#{file.extension}" if original_filename.present?
   end
 
+  include CarrierWave::MiniMagick
+
+  # jpgに変換
+  process convert: "jpg"
+
+  # ファイルの拡張子を jpg に変更
+  def filename
+    super.chomp(File.extname(super)) + ".jpg" if original_filename.present?
+  end
+
+  #画像サイズを変更
+  process resize_to_limit: [200,300]
+  
   protected
 
   def secure_token
