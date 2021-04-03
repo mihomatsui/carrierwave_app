@@ -17,4 +17,15 @@ class ImageUploader < CarrierWave::Uploader::Base
   def default_url(*args)
     "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   end
+
+  def filename
+    "#{secure_token}.#{file.extension}" if original_filename.present?
+  end
+
+  protected
+
+  def secure_token
+    var = :"@#{mounted_as}_secure_token"
+    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
+  end
 end
