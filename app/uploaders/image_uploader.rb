@@ -35,6 +35,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   #画像サイズを変更
   process resize_to_limit: [200,300]
   
+
+  version :thumb do
+    process resize_to_fit: [100, 100]
+  end
   protected
 
   def secure_token
